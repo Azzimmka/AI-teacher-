@@ -1,6 +1,6 @@
 /* General styling */
 :root {
-  --primary-color: #007bff;
+  --primary-color: #28a745; /* Educational Green */
   --text-color: #333;
   --bg-color: #ffffff;
   --bg-secondary-color: #f0f2f5;
@@ -156,7 +156,7 @@ code {
 #prompt-input:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.25);
 }
 
 #prompt-form button {
@@ -175,11 +175,21 @@ code {
 }
 
 #prompt-form button:hover, #prompt-form button:focus {
-  background-color: #0056b3;
+  background-color: #218838;
   outline: none;
 }
 
 #prompt-form button:disabled {
-  background-color: #a0c7ff;
+  background-color: #78c887;
   cursor: not-allowed;
+}
+
+footer {
+  text-align: center;
+  padding: 0.75rem;
+  font-size: 0.8rem;
+  color: #888;
+  background-color: var(--bg-color);
+  border-top: 1px solid var(--border-color);
+  flex-shrink: 0;
 }

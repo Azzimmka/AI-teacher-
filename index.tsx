@@ -76,29 +76,14 @@ async function callGemini(prompt: string) {
       model: 'gemini-2.5-flash',
       contents: prompt,
       config: {
-        tools: [{ codeExecution: {} }],
+        systemInstruction: "You are a friendly, patient, and expert AI English language tutor. Your goal is to help the user learn and practice English. Explain grammar concepts clearly with examples. Provide definitions and usage for vocabulary questions. Correct the user's mistakes gently and offer encouragement. Keep your tone supportive and engaging.",
       },
     });
     
-    // Using `any` to access potentially non-standard properties from the original code.
-    const executableCode = (response as any).executableCode;
-    const codeExecutionResult = (response as any).codeExecutionResult;
-
-    let fullResponse = '';
-    if (executableCode) {
-      fullResponse += '### Code Generated:\n```python\n' + executableCode + '\n```\n';
-    }
-    if (codeExecutionResult) {
-      fullResponse += '\n### Execution Result:\n' + codeExecutionResult;
-    }
-
-    if (fullResponse) {
-      await displayMessage(fullResponse, 'model');
-    } else if (response.text) {
-      // Fallback to text response if no code is generated
+    if (response.text) {
       await displayMessage(response.text, 'model');
     } else {
-      await displayMessage("I'm sorry, I couldn't generate a response for that. Please try a different prompt.", 'model');
+      await displayMessage("I'm sorry, I'm having trouble coming up with a response. Could you please try rephrasing?", 'model');
     }
   } catch (e) {
     const errorMessage = e instanceof Error ? e.message : 'An unknown error occurred.';
@@ -147,7 +132,7 @@ function main() {
       }
   });
 
-  displayMessage("Hello! I can write and execute Python code for you. What would you like to build or calculate?", 'model');
+  displayMessage("Hello! I'm your personal AI English tutor. What would you like to learn today? You can ask me about grammar, vocabulary, pronunciation, or we can just practice conversation.", 'model');
 }
 
 main();
